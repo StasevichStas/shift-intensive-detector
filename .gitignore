@@ -153,3 +153,4 @@ configs/local/default.yaml
 .aim
 
 tests/
+data/
