@@ -48,6 +48,11 @@
 conda create -n det-env python=3.12
 conda activate det-env
 
+or 
+
+micromamba create -n det-env python=3.12
+micromamba activate det-env
+
 pip install poetry==2.2.1
 poetry install --no-root
 ```
@@ -82,7 +87,7 @@ class_id x_center y_center width height
 ```
 gdown 'https://drive.google.com/file/d/1BVGnAGsvmTzE3VXwjRB4lAYveR_ZVz9C/view?usp=sharing' -O ./data/
 ```
-
+apt-get update && apt-get install unzip -y
 
 ## Обучение
 

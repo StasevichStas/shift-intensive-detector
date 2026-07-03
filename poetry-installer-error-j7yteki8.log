@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/tmp/poetry-installerbsse7rfy/virtualenv.pyz/__main__.py", line 188, in <module>
+  File "/tmp/poetry-installerbsse7rfy/virtualenv.pyz/__main__.py", line 184, in run
+  File "/tmp/poetry-installerbsse7rfy/virtualenv.pyz/virtualenv/__main__.py", line 30, in run
+  File "/tmp/poetry-installerbsse7rfy/virtualenv.pyz/virtualenv/run/__init__.py", line 44, in cli_run
+  File "/tmp/poetry-installerbsse7rfy/virtualenv.pyz/virtualenv/run/__init__.py", line 71, in session_via_cli
+  File "/tmp/poetry-installerbsse7rfy/virtualenv.pyz/virtualenv/run/__init__.py", line 72, in <genexpr>
+  File "/tmp/poetry-installerbsse7rfy/virtualenv.pyz/virtualenv/run/plugin/seeders.py", line 48, in create
+RuntimeError: the bundled seeder no longer ships pip/setuptools for Python 3.8; the oldest supported target is Python 3.9 - pass --no-seed for an empty environment, use a seeder that provides Python 3.8 wheels, or install an older virtualenv release
+
+Traceback:
+
+  File "<stdin>", line 936, in main
+  File "<stdin>", line 573, in run
+  File "<stdin>", line 594, in install
+  File "/usr/lib/python3.8/contextlib.py", line 113, in __enter__
+    return next(self.gen)
+  File "<stdin>", line 666, in make_env
+  File "<stdin>", line 652, in make_env
+  File "<stdin>", line 354, in make
+  File "<stdin>", line 378, in run
