@@ -1,0 +1,150 @@
+CONFIG
+├── data
+│   └── augmentations:                                                                                                             
+│       - _target_: torchvision.transforms.v2.RandomGrayscale                                                                      
+│         p: 0.5                                                                                                                   
+│       - _target_: torchvision.transforms.v2.RandomPhotometricDistort                                                             
+│         p: 0.1                                                                                                                   
+│       - _target_: torchvision.transforms.v2.RandomPerspective                                                                    
+│         distortion_scale: 0.2                                                                                                    
+│         p: 0.3                                                                                                                   
+│       _target_: src.data.cs_datamodule.CSDataModule                                                                              
+│       _recursive_: false                                                                                                         
+│       batch_size: 16                                                                                                             
+│       num_workers: 4                                                                                                             
+│       pin_memory: false                                                                                                          
+│       persistent_workers: true                                                                                                   
+│       input_shape: 512                                                                                                           
+│       train_images_path: /root/shift-intensive-detector/data//train/images                                                       
+│       train_labels_path: /root/shift-intensive-detector/data//train/labels                                                       
+│       val_images_path: /root/shift-intensive-detector/data//val/images                                                           
+│       val_labels_path: /root/shift-intensive-detector/data//val/labels                                                           
+│                                                                                                                                  
+├── model
+│   └── components:                                                                                                                
+│         backbone:                                                                                                                
+│           _target_: src.models.components.backbones.timm_backbone.TimmFPNBackbone                                                
+│           model: convnext_base                                                                                                   
+│           pretrained: true                                                                                                       
+│         detector:                                                                                                                
+│           _target_: src.models.components.detectors.fasterRCNN.FasterRCNNDecoder                                                 
+│           box_score_thresh: 0.05                                                                                                 
+│           box_nms_thresh: 0.5                                                                                                    
+│           box_detections_per_img: 100                                                                                            
+│         _target_: src.models.components.base_model.DetectionModel                                                                
+│         _recursive_: false                                                                                                       
+│         num_classes: 3                                                                                                           
+│       optimizer:                                                                                                                 
+│         _target_: torch.optim.AdamW                                                                                              
+│         _partial_: true                                                                                                          
+│         lr: 0.001                                                                                                                
+│         weight_decay: 0.0005                                                                                                     
+│         betas:                                                                                                                   
+│         - 0.9                                                                                                                    
+│         - 0.997                                                                                                                  
+│         eps: 1.0e-06                                                                                                             
+│       scheduler:                                                                                                                 
+│         _target_: src.lit_modules.schedulers.ChainCyclicLR                                                                       
+│         _partial_: true                                                                                                          
+│         lr_min: 5.0e-05                                                                                                          
+│         lr_max: 0.001                                                                                                            
+│         T0: 300                                                                                                                  
+│         warmup_steps: 100                                                                                                        
+│         scale_factor: 0.7                                                                                                        
+│       _target_: src.models.detection_module.DetectionLitModel                                                                    
+│       _recursive_: false                                                                                                         
+│       compile: false                                                                                                             
+│       iou_thresh: 0.5                                                                                                            
+│       loss_weights:                                                                                                              
+│         _target_: src.models.components.losses.DetectionLoss                                                                     
+│         loss_weights:                                                                                                            
+│           loss_classifier: 1.0                                                                                                   
+│           loss_box_reg: 1.0                                                                                                      
+│           loss_objectness: 1.0                                                                                                   
+│           loss_rpn_box_reg: 1.0                                                                                                  
+│                                                                                                                                  
+├── callbacks
+│   └── model_checkpoint:                                                                                                          
+│         _target_: lightning.pytorch.callbacks.ModelCheckpoint                                                                    
+│         dirpath: /root/shift-intensive-detector/logs/train/baseline/runs/2026-07-03_14-35-41/checkpoints                         
+│         filename: epoch_{epoch:03d}                                                                                              
+│         monitor: val/mAP50                                                                                                       
+│         verbose: false                                                                                                           
+│         save_last: true                                                                                                          
+│         save_top_k: 1                                                                                                            
+│         mode: max                                                                                                                
+│         auto_insert_metric_name: false                                                                                           
+│         save_weights_only: false                                                                                                 
+│         every_n_train_steps: null                                                                                                
+│         train_time_interval: null                                                                                                
+│         every_n_epochs: null                                                                                                     
+│         save_on_train_epoch_end: null                                                                                            
+│       early_stopping:                                                                                                            
+│         _target_: lightning.pytorch.callbacks.EarlyStopping                                                                      
+│         monitor: val/mAP50                                                                                                       
+│         min_delta: 0.0                                                                                                           
+│         patience: 100                                                                                                            
+│         verbose: false                                                                                                           
+│         mode: max                                                                                                                
+│         strict: true                                                                                                             
+│         check_finite: true                                                                                                       
+│         stopping_threshold: null                                                                                                 
+│         divergence_threshold: null                                                                                               
+│         check_on_train_epoch_end: null                                                                                           
+│       model_summary:                                                                                                             
+│         _target_: lightning.pytorch.callbacks.RichModelSummary                                                                   
+│         max_depth: -1                                                                                                            
+│       rich_progress_bar:                                                                                                         
+│         _target_: lightning.pytorch.callbacks.RichProgressBar                                                                    
+│                                                                                                                                  
+├── logger
+│   └── tensorboard:                                                                                                               
+│         _target_: lightning.pytorch.loggers.tensorboard.TensorBoardLogger                                                        
+│         save_dir: /root/shift-intensive-detector/logs/train/baseline/runs/2026-07-03_14-35-41/tensorboard/                       
+│         name: null                                                                                                               
+│         log_graph: true                                                                                                          
+│         default_hp_metric: true                                                                                                  
+│         prefix: ''                                                                                                               
+│                                                                                                                                  
+├── trainer
+│   └── _target_: lightning.pytorch.trainer.Trainer                                                                                
+│       default_root_dir: /root/shift-intensive-detector/logs/train/baseline/runs/2026-07-03_14-35-41                              
+│       min_epochs: 10                                                                                                             
+│       max_epochs: 10                                                                                                             
+│       gradient_clip_val: 0.5                                                                                                     
+│       gradient_clip_algorithm: norm                                                                                              
+│       check_val_every_n_epoch: 1                                                                                                 
+│       log_every_n_steps: 5                                                                                                       
+│       enable_model_summary: false                                                                                                
+│       deterministic: false                                                                                                       
+│       accelerator: gpu                                                                                                           
+│       devices: 1                                                                                                                 
+│                                                                                                                                  
+├── paths
+│   └── root_dir: /root/shift-intensive-detector                                                                                   
+│       data_dir: /root/shift-intensive-detector/data/                                                                             
+│       log_dir: /root/shift-intensive-detector/logs/                                                                              
+│       output_dir: /root/shift-intensive-detector/logs/train/baseline/runs/2026-07-03_14-35-41                                    
+│       work_dir: /root/shift-intensive-detector                                                                                   
+│                                                                                                                                  
+├── extras
+│   └── ignore_warnings: false                                                                                                     
+│       enforce_tags: true                                                                                                         
+│       print_config: true                                                                                                         
+│                                                                                                                                  
+├── task_name
+│   └── train                                                                                                                      
+├── experiment_name
+│   └── baseline                                                                                                                   
+├── tags
+│   └── ['my_exp', 'rcnn', 'convnext_base']                                                                                        
+├── train
+│   └── True                                                                                                                       
+├── test
+│   └── True                                                                                                                       
+├── ckpt_path
+│   └── None                                                                                                                       
+├── seed
+│   └── 12345                                                                                                                      
+└── matmul_precision
+    └── medium                                                                                                                     

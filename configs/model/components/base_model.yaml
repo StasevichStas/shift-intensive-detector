@@ -3,7 +3,7 @@ _target_: src.models.components.base_model.DetectionModel
 _recursive_: false
 
 defaults:
-  - backbone: mobilenet_v3_large
+  - backbone: convnext_base
   - detector: rcnn
 
 num_classes: 3

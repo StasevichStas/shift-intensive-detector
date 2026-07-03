@@ -1,0 +1,5 @@
+_target_: src.models.components.backbones.timm_backbone.TimmFPNBackbone
+
+model: convnext_base
+pretrained: true
+out_indices: [0, 1, 2, 3]

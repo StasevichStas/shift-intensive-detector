@@ -1,0 +1,108 @@
+[2026-07-03 14:35:41,958][src.utils.utils][INFO] - [rank: 0] Enforcing tags! <cfg.extras.enforce_tags=True>
+[2026-07-03 14:35:41,961][src.utils.utils][INFO] - [rank: 0] Printing config tree with Rich! <cfg.extras.print_config=True>
+[2026-07-03 14:35:41,984][__main__][INFO] - [rank: 0] Instantiating datamodule <src.data.cs_datamodule.CSDataModule>
+[2026-07-03 14:35:41,992][__main__][INFO] - [rank: 0] Instantiating model <src.models.detection_module.DetectionLitModel>
+[2026-07-03 14:35:42,651][timm.models._builder][INFO] - Loading pretrained weights from Hugging Face hub (timm/convnext_base.fb_in22k_ft_in1k)
+[2026-07-03 14:35:42,966][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/timm/convnext_base.fb_in22k_ft_in1k/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+[2026-07-03 14:35:42,966][huggingface_hub.utils._http][WARNING] - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[2026-07-03 14:35:58,901][timm.models._hub][INFO] - [timm/convnext_base.fb_in22k_ft_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+[2026-07-03 14:35:58,921][timm.models._builder][INFO] - Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+[2026-07-03 14:35:58,925][src.utils.utils][ERROR] - [rank: 0] 
+Traceback (most recent call last):
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target
+    return _target_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/shift-intensive-detector/src/models/components/backbones/timm_backbone.py", line 15, in __init__
+    self.backbone = timm.create_model(
+                    ^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/_factory.py", line 138, in create_model
+    model = create_fn(
+            ^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/convnext.py", line 1268, in convnext_base
+    model = _create_convnext('convnext_base', pretrained=pretrained, **dict(model_args, **kwargs))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/convnext.py", line 700, in _create_convnext
+    model = build_model_with_cfg(
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/_builder.py", line 499, in build_model_with_cfg
+    model = feature_cls(model, **feature_cfg)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/_features.py", line 336, in __init__
+    super().__init__(
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/_features.py", line 270, in __init__
+    return_layers = _get_return_layers(self.feature_info, out_map)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/_features.py", line 223, in _get_return_layers
+    module_names = feature_info.module_name()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/_features.py", line 141, in module_name
+    return self.get('module', idx)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/timm/models/_features.py", line 109, in get
+    return [self.info[i][key] for i in self.out_indices]
+            ~~~~~~~~~^^^
+IndexError: list index out of range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target
+    return _target_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/shift-intensive-detector/src/models/components/base_model.py", line 9, in __init__
+    backbone = hydra.utils.instantiate(backbone)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+           ^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node
+    return _call_target(_target_, partial, args, kwargs, full_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error in call to target 'src.models.components.backbones.timm_backbone.TimmFPNBackbone':
+IndexError('list index out of range')
+full_key: backbone
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target
+    return _target_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/shift-intensive-detector/src/models/detection_module.py", line 27, in __init__
+    self.model = hydra.utils.instantiate(components)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+           ^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node
+    return _call_target(_target_, partial, args, kwargs, full_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error in call to target 'src.models.components.base_model.DetectionModel':
+InstantiationException("Error in call to target 'src.models.components.backbones.timm_backbone.TimmFPNBackbone':\nIndexError('list index out of range')\nfull_key: backbone")
+full_key: components
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/shift-intensive-detector/src/utils/utils.py", line 67, in wrap
+    metric_dict, object_dict = task_func(cfg=cfg)
+                               ^^^^^^^^^^^^^^^^^^
+  File "/root/shift-intensive-detector/src/train.py", line 47, in train
+    model: LightningModule = hydra.utils.instantiate(cfg.model)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+           ^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node
+    return _call_target(_target_, partial, args, kwargs, full_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/micromamba/envs/det-env/lib/python3.12/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error in call to target 'src.models.detection_module.DetectionLitModel':
+InstantiationException('Error in call to target \'src.models.components.base_model.DetectionModel\':\nInstantiationException("Error in call to target \'src.models.components.backbones.timm_backbone.TimmFPNBackbone\':\\nIndexError(\'list index out of range\')\\nfull_key: backbone")\nfull_key: components')
+full_key: model
+[2026-07-03 14:35:58,927][src.utils.utils][INFO] - [rank: 0] Output dir: /root/shift-intensive-detector/logs/train/baseline/runs/2026-07-03_14-35-41

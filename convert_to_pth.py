@@ -1,7 +1,7 @@
 import torch
 
 # Путь к вашему чекпоинту
-ckpt_path = "/root/shift-intensive-detector/logs/train/no_exp/runs/2026-07-03_11-39-50/checkpoints/last.ckpt"  # или полный путь /root/shift-intensive-detector/logs/.../last.ckpt
+ckpt_path = "/root/shift-intensive-detector/logs/train/baseline/runs/2026-07-03_14-40-05/checkpoints/last.ckpt"  # или полный путь /root/shift-intensive-detector/logs/.../last.ckpt
 output_path = "model.pth"
 
 # 1. Загружаем чекпоинт (map_location='cpu' чтобы не тратить VRAM)
