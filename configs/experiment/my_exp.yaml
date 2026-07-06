@@ -8,7 +8,7 @@ defaults:
 
 
 tags: ["my_exp", "rcnn", "convnext_base"]
-experiment_name: 'baseline_convnext_base'
+experiment_name: 'lr_down_tf_efficientnetv2_l'
 seed: 12345
 
 #ckpt_path: для возобновления эксперимента
@@ -17,20 +17,21 @@ trainer:
   min_epochs: 10
   max_epochs: 10
   gradient_clip_val: 0.5
+  precision: '16-mixed'
 
 model:
 
   optimizer:
-    lr: 1e-3
+    lr: 3e-4                     # Для тяжелых сетей базовый LR лучше сделать поменьше (например, 2e-4 или 3e-4)
 
   scheduler:
     _target_: "src.lit_modules.schedulers.ChainCyclicLR"
     _partial_: true
-    lr_min: 5e-5
-    lr_max: 1e-3
-    T0: 300
-    warmup_steps: 100
-    scale_factor: 0.7
+    lr_min: 1e-6
+    lr_max: 3e-4
+    T0: 1000
+    warmup_steps: 500
+    scale_factor: 0.5
 
 data:
   batch_size: 4

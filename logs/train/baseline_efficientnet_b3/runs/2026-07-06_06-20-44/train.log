@@ -1,0 +1,24 @@
+[2026-07-06 06:20:44,838][src.utils.utils][INFO] - [rank: 0] Enforcing tags! <cfg.extras.enforce_tags=True>
+[2026-07-06 06:20:44,852][src.utils.utils][INFO] - [rank: 0] Printing config tree with Rich! <cfg.extras.print_config=True>
+[2026-07-06 06:20:44,941][__main__][INFO] - [rank: 0] Instantiating datamodule <src.data.cs_datamodule.CSDataModule>
+[2026-07-06 06:20:45,027][__main__][INFO] - [rank: 0] Instantiating model <src.models.detection_module.DetectionLitModel>
+[2026-07-06 06:20:46,757][timm.models._builder][INFO] - Loading pretrained weights from Hugging Face hub (timm/efficientnet_b3.ra2_in1k)
+[2026-07-06 06:20:46,999][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/agent-harnesses "HTTP/1.1 200 OK"
+[2026-07-06 06:20:47,157][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/timm/efficientnet_b3.ra2_in1k/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+[2026-07-06 06:20:47,158][huggingface_hub.utils._http][WARNING] - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[2026-07-06 06:20:51,018][timm.models._hub][INFO] - [timm/efficientnet_b3.ra2_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+[2026-07-06 06:20:51,081][timm.models._builder][WARNING] - Unexpected keys (bn2.num_batches_tracked, bn2.bias, bn2.running_mean, bn2.running_var, bn2.weight, classifier.bias, classifier.weight, conv_head.weight) found while loading pretrained weights. This may be expected if model is being adapted.
+[2026-07-06 06:20:51,315][__main__][INFO] - [rank: 0] Instantiating callbacks...
+[2026-07-06 06:20:51,315][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.ModelCheckpoint>
+[2026-07-06 06:20:51,319][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.EarlyStopping>
+[2026-07-06 06:20:51,320][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichModelSummary>
+[2026-07-06 06:20:51,320][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichProgressBar>
+[2026-07-06 06:20:51,321][__main__][INFO] - [rank: 0] Instantiating loggers...
+[2026-07-06 06:20:51,321][src.utils.instantiators][INFO] - [rank: 0] Instantiating logger <lightning.pytorch.loggers.tensorboard.TensorBoardLogger>
+[2026-07-06 06:20:51,323][__main__][INFO] - [rank: 0] Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-07-06 06:20:51,365][__main__][INFO] - [rank: 0] Logging hyperparameters!
+[2026-07-06 06:20:51,601][__main__][INFO] - [rank: 0] Starting training!
+[2026-07-06 06:48:29,777][__main__][INFO] - [rank: 0] Starting testing!
+[2026-07-06 06:48:37,578][__main__][INFO] - [rank: 0] Best ckpt path: /root/shift-intensive-detector/logs/train/baseline_efficientnet_b3/runs/2026-07-06_06-20-44/checkpoints/epoch_009.ckpt
+[2026-07-06 06:48:37,580][src.utils.utils][INFO] - [rank: 0] Output dir: /root/shift-intensive-detector/logs/train/baseline_efficientnet_b3/runs/2026-07-06_06-20-44
+[2026-07-06 06:48:37,580][src.utils.utils][INFO] - [rank: 0] Metric name is None! Skipping metric value retrieval...

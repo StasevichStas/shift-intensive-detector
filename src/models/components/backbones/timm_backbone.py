@@ -7,11 +7,17 @@ class TimmFPNBackbone(nn.Module):
     def __init__(self,
                  model: str = 'mobilenetv3_large_100',
                  pretrained: bool = True,
-                 out_indices=(1, 2, 3, 4),
-                 fpn_out_channels: int = 256,):
+                 fpn_out_channels: int = 256):
         super().__init__()
 
+        # 1. Создаем временную модель, чтобы узнать структуру ее фичей
+        temp_model = timm.create_model(model, pretrained=False, features_only=True)
+        num_stages = len(temp_model.feature_info.channels())
+        
+        # 2. Берем последние 4 этапа (подходит и для 4-этапных, и для 5-этапных моделей)
+        out_indices = tuple(range(max(0, num_stages - 4), num_stages))
 
+        # 3. Создаем финальный бэкбон
         self.backbone = timm.create_model(
             model,
             pretrained=pretrained,
@@ -30,12 +36,8 @@ class TimmFPNBackbone(nn.Module):
 
     def forward(self, x):
         features = self.backbone(x)
-
         features = OrderedDict(
             (str(i), feat)
             for i, feat in enumerate(features)
         )
-
-        features = self.fpn(features)
-
-        return features
+        return self.fpn(features)

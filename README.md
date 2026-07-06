@@ -49,7 +49,7 @@ conda create -n det-env python=3.12
 conda activate det-env
 
 or 
-
+"${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 micromamba create -n det-env python=3.12
 micromamba activate det-env
 
@@ -101,6 +101,8 @@ poetry run python src/train.py
 
 ```bash
 poetry run python src/train.py experiment=baseline
+poetry run python src/train.py experiment=my_exp
+
 ```
 
 Переопределение параметров из консоли:

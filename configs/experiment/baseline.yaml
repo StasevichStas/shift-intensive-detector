@@ -19,16 +19,7 @@ trainer:
   gradient_clip_val: 0.5
 
 model:
-  components:
-    _target_: src.models.components.base_model.DetectionModel
 
-_recursive_: false
-
-defaults:
-  - backbone: mobilenet_v3_large
-  - detector: rcnn
-
-num_classes: 3
   optimizer:
     lr: 1e-3
 
@@ -42,4 +33,4 @@ num_classes: 3
     scale_factor: 0.7
 
 data:
-  batch_size: 16
+  batch_size: 4
