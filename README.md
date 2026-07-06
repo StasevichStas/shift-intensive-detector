@@ -137,6 +137,8 @@ poetry run python src/eval.py ckpt_path=/path/to/checkpoint.ckpt
 
 ```bash
 poetry run tensorboard --logdir logs
+git config --global user.email "s.astapenko@g.nsu.ru"
+git config --global user.name "Stasevich"
 ```
 
 Доступные логгеры:
