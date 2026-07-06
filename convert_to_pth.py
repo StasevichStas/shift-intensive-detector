@@ -1,8 +1,8 @@
 import torch
 
 # Путь к вашему чекпоинту
-ckpt_path = "/root/shift-intensive-detector/logs/train/test_lr_down_tf_efficientnetv2_l/runs/2026-07-06_11-57-25/checkpoints/last.ckpt"  # или полный путь /root/shift-intensive-detector/logs/.../last.ckpt
-output_path = "test_lr_down_tf_efficientnetv2_l.pth"
+ckpt_path = "/root/shift-intensive-detector/logs/train/test_lr_mobilenetv3_small_100/runs/2026-07-06_15-22-44/checkpoints/last.ckpt"  # или полный путь /root/shift-intensive-detector/logs/.../last.ckpt
+output_path = "mobilenetv3_small_100.pth"
 
 # 1. Загружаем чекпоинт (map_location='cpu' чтобы не тратить VRAM)
 checkpoint = torch.load(ckpt_path, map_location="cpu")

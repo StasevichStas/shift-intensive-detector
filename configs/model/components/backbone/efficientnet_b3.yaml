@@ -1,4 +1,4 @@
 _target_: src.models.components.backbones.timm_backbone.TimmFPNBackbone
 
-model: tf_efficientnetv2_l
+model: repvgg_b2g4 #convnext_base tf_efficientnetv2_l mobilenetv3_large_100 hgnetv2_b4 repvgg_b2g4
 pretrained: true

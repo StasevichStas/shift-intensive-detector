@@ -8,7 +8,7 @@ defaults:
 
 
 tags: ["my_exp", "rcnn", "convnext_base"]
-experiment_name: 'test_lr_down_tf_efficientnetv2_l'
+experiment_name: 'test_lr_repvgg_b2g4'
 seed: 12345
 
 #ckpt_path: для возобновления эксперимента
