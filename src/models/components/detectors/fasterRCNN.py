@@ -85,6 +85,5 @@ class FasterRCNNDecoder(nn.Module):
             rpn_post_nms_top_n_test=300,
         )
 
-    # === ВОТ ЭТОТ МЕТОД ОБЯЗАТЕЛЬНО ДОЛЖЕН БЫТЬ ТУТ: ===
     def forward(self, images, targets=None):
         return self.model(images, targets)
