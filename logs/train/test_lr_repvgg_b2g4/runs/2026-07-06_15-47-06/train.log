@@ -16,3 +16,7 @@
 [2026-07-06 15:47:21,965][__main__][INFO] - [rank: 0] Instantiating trainer <lightning.pytorch.trainer.Trainer>
 [2026-07-06 15:47:22,009][__main__][INFO] - [rank: 0] Logging hyperparameters!
 [2026-07-06 15:47:22,074][__main__][INFO] - [rank: 0] Starting training!
+[2026-07-06 16:15:23,785][__main__][INFO] - [rank: 0] Starting testing!
+[2026-07-06 16:15:25,295][__main__][INFO] - [rank: 0] Best ckpt path: /root/shift-intensive-detector/logs/train/test_lr_repvgg_b2g4/runs/2026-07-06_15-47-06/checkpoints/epoch_000.ckpt
+[2026-07-06 16:15:25,296][src.utils.utils][INFO] - [rank: 0] Output dir: /root/shift-intensive-detector/logs/train/test_lr_repvgg_b2g4/runs/2026-07-06_15-47-06
+[2026-07-06 16:15:25,297][src.utils.utils][INFO] - [rank: 0] Metric name is None! Skipping metric value retrieval...
