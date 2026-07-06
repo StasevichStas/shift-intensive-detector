@@ -156,3 +156,4 @@ configs/local/default.yaml
 
 tests/
 data/
+*.pth
