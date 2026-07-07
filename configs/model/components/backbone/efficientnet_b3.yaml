@@ -1,4 +1,4 @@
 _target_: src.models.components.backbones.timm_backbone.TimmFPNBackbone
 
-model: mobilenetv3_large_100 #convnext_base tf_efficientnetv2_l mobilenetv3_large_100 hgnetv2_b4 lcnet_100 ghostnet_100 shufflenetv2_x1_0
+model: ghostnet_100 #convnext_base tf_efficientnetv2_l mobilenetv3_large_100 hgnetv2_b4 lcnet_100 ghostnet_100 
 pretrained: true

@@ -1,0 +1,2 @@
+0 ct-terr
+1 terr

@@ -88,7 +88,7 @@ class_id x_center y_center width height
 gdown 'https://drive.google.com/file/d/1BVGnAGsvmTzE3VXwjRB4lAYveR_ZVz9C/view?usp=sharing' -O ./data/
 ```
 apt-get update && apt-get install unzip -y
-
+mv "data2/Counter Strike 2.v1i.yolov8/valid/labels/"* data/train/labels/ 
 ## Обучение
 
 Запуск с настройками по умолчанию:

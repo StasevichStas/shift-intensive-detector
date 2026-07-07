@@ -8,7 +8,7 @@ defaults:
 
 
 tags: ["baseline", "rcnn", "mobilenetv3"]
-experiment_name: 'baseline'
+experiment_name: 'tr_fullbigdata_img256_ghostnet_100'
 seed: 12345
 
 #ckpt_path: для возобновления эксперимента
@@ -17,6 +17,7 @@ trainer:
   min_epochs: 10
   max_epochs: 10
   gradient_clip_val: 0.5
+  precision: '16-mixed'
 
 model:
 
@@ -33,4 +34,4 @@ model:
     scale_factor: 0.7
 
 data:
-  batch_size: 4
+  batch_size: 16

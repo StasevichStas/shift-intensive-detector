@@ -6,7 +6,7 @@ batch_size: 2
 num_workers: 4
 pin_memory: false
 persistent_workers: true
-input_shape: 512
+input_shape: 256
 
 train_images_path: ${paths.data_dir}/train/images
 train_labels_path: ${paths.data_dir}/train/labels

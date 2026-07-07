@@ -8,7 +8,7 @@ defaults:
 
 
 tags: ["my_exp", "rcnn", "convnext_base"]
-experiment_name: 'mobilenetv3_large_100_new_head'
+experiment_name: 'mobilenetv3_large_100_new_lrUP'
 seed: 12345
 
 #ckpt_path: для возобновления эксперимента
@@ -19,19 +19,22 @@ trainer:
   gradient_clip_val: 0.5
   precision: '16-mixed'
 
-model:
 
+model:
   optimizer:
-    lr: 3e-4                     # Для тяжелых сетей базовый LR лучше сделать поменьше (например, 2e-4 или 3e-4)
+    # Возвращаем законный высокий LR для легких сетей
+    lr: 1e-3                     
 
   scheduler:
     _target_: "src.lit_modules.schedulers.ChainCyclicLR"
     _partial_: true
-    lr_min: 1e-6
-    lr_max: 3e-4
-    T0: 1000
-    warmup_steps: 500
-    scale_factor: 0.5
+    lr_min: 5e-5                  # Минимум делаем повыше, чтобы сеть не засыпала
+    lr_max: 1e-3                  # Пик равен lr из оптимизатора
+    
+    # Адаптируем шаги под короткое обучение (10 эпох):
+    warmup_steps: 150             # Быстрый разогрев (буквально за первые пол-эпохи)
+    T0: 400                       # Делаем волны короче, чтобы за 10 эпох сеть успела несколько раз упасть и подняться
+    scale_factor: 0.7             # Ослабляем затухание (0.7 вместо 0.5), чтобы держать LR высоким дольше
 
 data:
-  batch_size: 4
+  batch_size: 32

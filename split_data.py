@@ -7,7 +7,7 @@ from tqdm import tqdm  # Keeps track of progress in the terminal
 source_images_dir = "./data/train/images"  # Ваша текущая папка с картинками
 source_labels_dir = "./data/train/labels"  # Ваша текущая папка с разметкой txt
 
-output_base_dir = "./data"   # Главная папка для нового датасета
+output_base_dir = "./data/split"   # Главная папка для нового датасета
 
 # Пути для новых папок
 train_images_dir = os.path.join(output_base_dir, "train/images")
