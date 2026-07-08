@@ -1,0 +1,12 @@
+_target_: src.models.yolo_module.YoloLightningAdapter
+_recursive_: false
+
+# Название базовой нано-модели (скачается автоматически)
+model_name: "yolov8n.pt"
+
+# Размер картинки, который мы берем из твоего data-конфига
+imgsz: ${data.input_shape}
+
+# Базовые параметры обучения
+lr0: 0.01
+weight_decay: 0.0005

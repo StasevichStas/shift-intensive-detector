@@ -1,0 +1,15 @@
+[2026-07-08 06:22:02,815][src.utils.utils][INFO] - [rank: 0] Enforcing tags! <cfg.extras.enforce_tags=True>
+[2026-07-08 06:22:02,819][src.utils.utils][INFO] - [rank: 0] Printing config tree with Rich! <cfg.extras.print_config=True>
+[2026-07-08 06:22:02,932][__main__][INFO] - [rank: 0] Instantiating datamodule <src.data.cs_datamodule.CSDataModule>
+[2026-07-08 06:22:02,943][__main__][INFO] - [rank: 0] Instantiating model <src.models.yolo_module.YoloLightningAdapter>
+[2026-07-08 06:22:03,752][__main__][INFO] - [rank: 0] Instantiating callbacks...
+[2026-07-08 06:22:03,752][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.ModelCheckpoint>
+[2026-07-08 06:22:03,754][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.EarlyStopping>
+[2026-07-08 06:22:03,754][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichModelSummary>
+[2026-07-08 06:22:03,755][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichProgressBar>
+[2026-07-08 06:22:03,755][__main__][INFO] - [rank: 0] Instantiating loggers...
+[2026-07-08 06:22:03,755][src.utils.instantiators][INFO] - [rank: 0] Instantiating logger <lightning.pytorch.loggers.tensorboard.TensorBoardLogger>
+[2026-07-08 06:22:03,756][__main__][INFO] - [rank: 0] Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-07-08 06:22:03,787][__main__][INFO] - [rank: 0] Logging hyperparameters!
+[2026-07-08 06:22:03,903][__main__][INFO] - [rank: 0] Starting training!
+[2026-07-08 06:26:51,327][src.utils.utils][INFO] - [rank: 0] Output dir: /root/shift-intensive-detector/logs/train/no_exp/runs/2026-07-08_06-22-02

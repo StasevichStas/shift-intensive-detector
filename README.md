@@ -95,6 +95,8 @@ mv "data2/Counter Strike 2.v1i.yolov8/valid/labels/"* data/train/labels/
 
 ```bash
 poetry run python src/train.py
+poetry run python src/train.py model=yolo
+
 ```
 
 Запуск baseline-эксперимента:
