@@ -27,7 +27,8 @@ dependencies = [
     "tensorboard (>=2.20.0,<3.0.0)",
     "hydra-colorlog (>=1.2.0,<2.0.0)",
     "scipy (>=1.17.1,<2.0.0)",
-    "gdown (>=6.0.0,<7.0.0)"
+    "gdown (>=6.0.0,<7.0.0)",
+    "ultralytics (>=8.3.0)"
 ]
 
 

@@ -47,7 +47,7 @@ if missing_labels_count > 0:
 random.seed(42)  # Фиксируем seed, чтобы результат разделения был воспроизводимым
 random.shuffle(paired_dataset)
 
-split_index = int(len(paired_dataset) * 0.9)  # 90% уходит в train
+split_index = int(len(paired_dataset) * 0.7)  # 90% уходит в train
 train_pairs = paired_dataset[:split_index]
 val_pairs = paired_dataset[split_index:]
 

@@ -26,7 +26,7 @@ defaults:
 
 # название задачи, определяет путь выходной директории
 task_name: "train"
-experiment_name: "img512_yolo"
+experiment_name: "full_img512_yolo8n"
 # теги для идентификации ваших экспериментов
 # вы можете переопределить это в конфигах экспериментов
 # переопределите из командной строки с помощью `python train.py tags="[first_tag, second_tag]"`

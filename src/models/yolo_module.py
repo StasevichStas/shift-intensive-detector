@@ -14,7 +14,7 @@ class YoloLightningAdapter(LightningModule):
         super().__init__()
         self.save_hyperparameters()
         
-        self.yolo_model = YOLO(model_name)
+        self.yolo_model = YOLO("yolov8n.pt")
         self.dummy_param = torch.nn.Parameter(torch.zeros(1))
 
     def training_step(self, batch: Any, batch_idx: int) -> torch.Tensor:
@@ -46,11 +46,11 @@ class YoloLightningAdapter(LightningModule):
     def on_fit_start(self) -> None:
         yolo_args = {
             "data": "configs/data/yolo_dataset.yaml", 
-            "epochs": 15 or 50,
+            "epochs": 50,
             "imgsz": 512, 
             "device": self.device.index if self.device.type == "cuda" else "cpu",
-            "lr0": self.hparams.lr0,
-            "weight_decay": self.hparams.weight_decay,
+            "lr0": 0.01,
+            "weight_decay": 0.0005,
             "project": self.trainer.default_root_dir, 
             "name": "yolo_run",
             "verbose": True,  
@@ -75,11 +75,20 @@ class YoloLightningAdapter(LightningModule):
             epoch = yolo_trainer.epoch
             
             if self.logger and hasattr(self.logger.experiment, "add_scalar"):
+                # 1. Твои метрики mAP
                 if "metrics/mAP50(B)" in metrics_dict:
                     self.logger.experiment.add_scalar("yolo_epoch/mAP50", float(metrics_dict["metrics/mAP50(B)"]), epoch)
                 if "metrics/mAP50-95(B)" in metrics_dict:
                     self.logger.experiment.add_scalar("yolo_epoch/mAP50-95", float(metrics_dict["metrics/mAP50-95(B)"]), epoch)
-
+                    
+                # 2. Добавляем валидационные лоссы (Важно: проверяем именно ключи с префиксом val/)
+                if "val/box_loss" in metrics_dict:
+                    self.logger.experiment.add_scalar("yolo_epoch/val_box_loss", float(metrics_dict["val/box_loss"]), epoch)
+                if "val/cls_loss" in metrics_dict:
+                    self.logger.experiment.add_scalar("yolo_epoch/val_cls_loss", float(metrics_dict["val/cls_loss"]), epoch)
+                if "val/dfl_loss" in metrics_dict:
+                    self.logger.experiment.add_scalar("yolo_epoch/val_dfl_loss", float(metrics_dict["val/dfl_loss"]), epoch)
+        
         self.yolo_model.add_callback("on_train_batch_end", on_train_batch_end)
         self.yolo_model.add_callback("on_fit_epoch_end", on_fit_epoch_end)
 
@@ -88,7 +97,7 @@ class YoloLightningAdapter(LightningModule):
         self.yolo_model.train(**yolo_args)
         
         # Экспорт
-        self.yolo_model.export(format="onnx", imgsz=self.hparams.imgsz, half=True)
+        self.yolo_model.export(format="onnx", imgsz=512, half=True)
 
         # Перехватываем ограничение min_epochs: говорим Lightning, что мы якобы уже на финише
         self.trainer.should_stop = True

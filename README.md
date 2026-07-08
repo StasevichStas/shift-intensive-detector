@@ -89,13 +89,14 @@ gdown 'https://drive.google.com/file/d/1BVGnAGsvmTzE3VXwjRB4lAYveR_ZVz9C/view?us
 ```
 apt-get update && apt-get install unzip -y
 mv "data2/Counter Strike 2.v1i.yolov8/valid/labels/"* data/train/labels/ 
+wget https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt
 ## Обучение
 
 Запуск с настройками по умолчанию:
 
 ```bash
 poetry run python src/train.py
-poetry run python src/train.py model=yolo
+python src/train.py model=yolo
 
 ```
 

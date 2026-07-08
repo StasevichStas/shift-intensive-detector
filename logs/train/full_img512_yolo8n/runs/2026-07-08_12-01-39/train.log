@@ -1,0 +1,18 @@
+[2026-07-08 12:01:40,037][src.utils.utils][INFO] - [rank: 0] Enforcing tags! <cfg.extras.enforce_tags=True>
+[2026-07-08 12:01:40,132][src.utils.utils][INFO] - [rank: 0] Printing config tree with Rich! <cfg.extras.print_config=True>
+[2026-07-08 12:01:40,161][__main__][INFO] - [rank: 0] Instantiating datamodule <src.data.cs_datamodule.CSDataModule>
+[2026-07-08 12:01:40,173][__main__][INFO] - [rank: 0] Instantiating model <src.models.yolo_module.YoloLightningAdapter>
+[2026-07-08 12:01:40,322][__main__][INFO] - [rank: 0] Instantiating callbacks...
+[2026-07-08 12:01:40,323][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.ModelCheckpoint>
+[2026-07-08 12:01:40,324][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.EarlyStopping>
+[2026-07-08 12:01:40,325][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichModelSummary>
+[2026-07-08 12:01:40,325][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichProgressBar>
+[2026-07-08 12:01:40,325][__main__][INFO] - [rank: 0] Instantiating loggers...
+[2026-07-08 12:01:40,325][src.utils.instantiators][INFO] - [rank: 0] Instantiating logger <lightning.pytorch.loggers.tensorboard.TensorBoardLogger>
+[2026-07-08 12:01:40,327][__main__][INFO] - [rank: 0] Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-07-08 12:01:40,358][__main__][INFO] - [rank: 0] Logging hyperparameters!
+[2026-07-08 12:01:40,391][__main__][INFO] - [rank: 0] Starting training!
+[2026-07-08 12:11:27,406][__main__][INFO] - [rank: 0] Starting testing!
+[2026-07-08 12:11:30,203][__main__][INFO] - [rank: 0] Best ckpt path: /root/shift-intensive-detector/logs/train/full_img512_yolo8n/runs/2026-07-08_12-01-39/checkpoints/epoch_000.ckpt
+[2026-07-08 12:11:30,204][src.utils.utils][INFO] - [rank: 0] Output dir: /root/shift-intensive-detector/logs/train/full_img512_yolo8n/runs/2026-07-08_12-01-39
+[2026-07-08 12:11:30,205][src.utils.utils][INFO] - [rank: 0] Metric name is None! Skipping metric value retrieval...
